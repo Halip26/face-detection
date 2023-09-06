@@ -2,10 +2,13 @@ import cv2
 import os
 import sys
 
-# memuat gambar yang akan diuji
+# berikan jalur gambar sebagai argumen
 image_path = sys.argv[1]
+
+# membuat gambar output dengan nama yang sama dengan gambar input
 output_image_name = os.path.splitext(image_path)[0] + "_detected.jpg"
 
+# memuat gambar yang akan diuji
 image = cv2.imread(image_path)
 
 # mengubah ke skala keabuan
