@@ -32,10 +32,10 @@ model.setInput(blob)
 # melakukan inferensi & mendaptkan hasilnya
 output = np.squeeze(model.forward())
 
-# define variabel font_scale
-font_scale = 1.0
+# mendefinisikan variabel font_scale
+font_scale = 0.8
 
-# create rectangle with looping
+# buat persegi panjang untuk mendeteksi wajah dengan perulangan
 for i in range(0, output.shape[0]):
     # membuat var kepercayaan untuk output looping i
     confidence = output[i, 2]
