@@ -8,7 +8,7 @@ prototxt_path = "weights/deploy.prototxt.txt"
 model_path = "weights/res10_300x300_ssd_iter_140000_fp16.caffemodel"
 
 # menginisialisasi pengenalan wajah (defult face haarcascade)
-face_cascade = cv2.CascadeClassifier("cascades/haarcascade_fontalface_default.xml")
+face_cascade = cv2.CascadeClassifier("cascades/haarcascade_frontalface_default.xml")
 
 # memuat model caffe
 model = cv2.dnn.readNetFromCaffe(prototxt_path, model_path)
@@ -38,7 +38,7 @@ while True:
     output = np.squeeze(model.forward())
 
     # mendefinisikan variabel font_scale
-    font_scale = 0.7
+    font_scale = 0.6
 
     # buat persegi panjang untuk mendeteksi wajah dengan perulangan
     for i in range(0, output.shape[0]):

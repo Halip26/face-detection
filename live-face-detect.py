@@ -4,7 +4,7 @@ import cv2
 capture = cv2.VideoCapture(0)
 
 # menginisialisasi pengenalan wajah (defult face haarcascade)
-face_cascade = cv2.CascadeClassifier("cascades/haarcascade_fontalface_default.xml")
+face_cascade = cv2.CascadeClassifier("cascades/haarcascade_frontalface_default.xml")
 
 while True:
     # membaca gambar/frame dari kamera

@@ -15,7 +15,7 @@ image = cv2.imread(image_path)
 image_gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
 
 # inisialisasi pengenal wajah (cascade wajah default)
-face_cascade = cv2.CascadeClassifier("cascades/haarcascade_fontalface_default.xml")
+face_cascade = cv2.CascadeClassifier("cascades/haarcascade_frontalface_default.xml")
 
 # mendeteksi semua wajah pada gambar (variabel image)
 faces = face_cascade.detectMultiScale(image_gray, 1.3, 5)
