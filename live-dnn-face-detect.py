@@ -72,19 +72,23 @@ while True:
 
             # mencetak jumlah wajah yang terdeteksi
             if len(faces) > 1:
-                print(f"{len(faces)} faces detected on the camera.")
+                print(f"{len(faces)} faces detected on the camera")
             else:
-                print(f"{len(faces)} face detected on the camera.")
+                print(f"{len(faces)} face detected on the camera")
 
             # mencetak jumlah wajah yang terdeteksi beserta tingkat akurasinya
-            """if len(faces) > 1:
+            """
+            if len(faces) > 1:
                 print(
-                    f"{len(faces)} faces detected on the camera, \n{facialAccuracy*100:.2f}% facialAccuracy"
+                    f"{len(faces)} faces detected on the camera, {facialAccuracy*100:.2f}% Accuracy",
+                    end="\r",
                 )
             else:
                 print(
-                    f"{len(faces)} face detected on the camera, \n{facialAccuracy*100:.2f}% facialAccuracy"
-                )"""
+                    f"{len(faces)} face detected on the camera, {facialAccuracy*100:.2f}% Accuracy",
+                    end="\r",
+                )
+            """
 
     # menampilkan jendela baru
     cv2.imshow("Face detect v1.0", image)

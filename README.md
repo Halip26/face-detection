@@ -8,7 +8,7 @@
 
 ## Example here
 
-  ![me.jpg](me.jpg)
+  ![me.jpg](output/me.jpg)
 
 ## Path prototxt model Caffe
 

@@ -15,8 +15,18 @@ model = cv2.dnn.readNetFromCaffe(prototxt_path, model_path)
 # berikan jalur gambar sebagai argumen
 image_path = sys.argv[1]
 
-# membuat gambar output dengan nama yang sama dengan gambar input
-output_image_name = os.path.splitext(image_path)[0] + "_detected.jpg"
+output_directory = "output/"
+
+os.makedirs(output_directory, exist_ok=True)
+
+# Ekstrak nama file dari image_path
+filename = os.path.basename(image_path)
+
+# Memisahkan nama file dan ekstensi
+name, extension = os.path.splitext(filename)
+
+# Gabungkan direktori output & nama file yg ditambah akhiran "_detected"
+output_image_path = os.path.join(output_directory, f"{name}_detected{extension}")
 
 # memuat gambar yang akan diuji
 image = cv2.imread(image_path)
@@ -33,19 +43,19 @@ model.setInput(blob)
 output = np.squeeze(model.forward())
 
 # mendefinisikan variabel font_scale
-font_scale = 0.8
+font_scale = 1
 
 # buat persegi panjang untuk mendeteksi wajah dengan perulangan
 for i in range(0, output.shape[0]):
     # membuat var kepercayaan untuk output looping i
-    confidence = output[i, 2]
+    face_accuracy = output[i, 2]
 
     # jika kepercayaan di atas 50%, maka gambarkan kotak sekitarnya
-    if confidence > 0.5:
+    if face_accuracy > 0.5:
         # get koordinat kotak sekitarnya dan memperbesar ukurannya ke gambar asli
         box = output[i, 3:7] * np.array([w, h, w, h])
         # mengkonversi ke integer
-        start_x, start_y, end_x, end_y = box.astype(np.int)
+        start_x, start_y, end_x, end_y = box.astype(np.int64)
         # menggambar persegi panjang disekitar wajah
         cv2.rectangle(
             image, (start_x, start_y), (end_x, end_y), color=(0, 128, 0), thickness=4
@@ -53,7 +63,7 @@ for i in range(0, output.shape[0]):
         # membuat teksnya juga diatas persegi panjang
         cv2.putText(
             image,
-            f"{confidence*100:.2f}%",
+            f"Face {face_accuracy*100:.2f}%",
             (start_x, start_y - 5),
             cv2.FONT_HERSHEY_SIMPLEX,
             font_scale,
@@ -66,4 +76,4 @@ cv2.imshow("The results", image)
 cv2.waitKey(0)
 
 # menyimpan gambar beserta persegi panjangnya
-cv2.imwrite(output_image_name, image)
+cv2.imwrite(output_image_path, image)
