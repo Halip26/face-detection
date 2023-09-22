@@ -30,11 +30,8 @@ face_cascade = cv2.CascadeClassifier("cascades/haarcascade_frontalface_default.x
 # mendeteksi semua wajah pada gambar (variabel image)
 faces = face_cascade.detectMultiScale(image_gray, 1.3, 5)
 
-# mencetak jumlah wajah yang terdeteksi
-if len(faces) > 1:
-    print(f"{len(faces)} faces detected on the camera")
-else:
-    print(f"{len(faces)} face detected on the camera")
+# menghitung jumlah wajah yg terdeteksi
+face_count = len(faces)
 
 # untuk setiap wajah akan menggambar persegi
 for x, y, width, height in faces:
@@ -42,8 +39,19 @@ for x, y, width, height in faces:
         image, (x, y), (x + width, y + height), color=(0, 128, 0), thickness=4
     )
 
+# mencetak jumlah wajah yang terdeteksi
+if len(faces) > 1:
+    print(f"{len(faces)} faces detected on the camera")
+else:
+    print(f"{len(faces)} face detected on the camera")
+
+# mengatur lebar & tinggi gambar di window
+width = 720
+height = 540
+
 # mengatur ukuran jendela sesuai dengan gambar asli
 cv2.namedWindow("The results", cv2.WINDOW_NORMAL)
+cv2.resizeWindow("The results", width, height)
 
 # # menampilkan gambarnya pada jendela baru
 cv2.imshow("The results", image)

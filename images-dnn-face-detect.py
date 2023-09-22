@@ -32,7 +32,7 @@ output_image_path = os.path.join(output_directory, f"{name}_dnn_detected{extensi
 image = cv2.imread(image_path)
 
 # mendapatkan lebar & tinggi gambar
-height, width, _ = image.shape
+height, width = image.shape[:2]
 
 # mengubah ke skala keabuan
 image_gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
@@ -81,10 +81,15 @@ for i in range(0, output.shape[0]):
             (0, 128, 0),
             2,
         )
+# mencetak jumlah wajah yang terdeteksi
 if len(faces) > 1:
     print(f"{len(faces)} faces detected on the camera")
 else:
     print(f"{len(faces)} face detected on the camera")
+
+# mengatur lebar & tinggi gambar di window
+width = 720
+height = 640
 
 # mengatur ukuran jendela sesuai dengan gambar asli
 cv2.namedWindow("The results", cv2.WINDOW_NORMAL)
