@@ -76,9 +76,9 @@ while True:
 
             # mencetak jumlah wajah yang terdeteksi
             if face_count > 1:
-                print(f"{face_count} faces detected on the camera")
+                print(f"{face_count} faces detected on the camera", end="\r")
             else:
-                print(f"{face_count} face detected on the camera")
+                print(f"{face_count} face detected on the camera", end="\r")
 
             # mencetak jumlah wajah yang terdeteksi beserta tingkat akurasinya
             """
