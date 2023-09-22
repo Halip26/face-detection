@@ -15,6 +15,9 @@ while True:
     # mendeteksi semua wajah pada kamera
     faces = face_cascade.detectMultiScale(image_gray, 1.3, 5)
 
+    # menghitung jumlah wajah yg terdeteksi
+    face_count = len(faces)
+
     # untuk setiap wajah, menggambar persegi panjang
     for x, y, width, height in faces:
         cv2.rectangle(
@@ -24,10 +27,10 @@ while True:
     cv2.imshow("Face detect v1.0", image)
 
     # mencetak jumlah wajah yang terdeteksi
-    if len(faces) > 1:
-        print(f"{len(faces)} faces detected on the camera.")
+    if face_count > 1:
+        print(f"{face_count} faces detected on the camera")
     else:
-        print(f"{len(faces)} face detected on the camera.")
+        print(f"{face_count} face detected on the camera")
 
     # jika pegguna menekan tombol q
     # maka perulangan akan berhenti

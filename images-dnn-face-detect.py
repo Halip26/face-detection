@@ -26,12 +26,22 @@ filename = os.path.basename(image_path)
 name, extension = os.path.splitext(filename)
 
 # Gabungkan direktori output & nama file yg ditambah akhiran "_detected"
-output_image_path = os.path.join(output_directory, f"{name}_detected{extension}")
+output_image_path = os.path.join(output_directory, f"{name}_dnn_detected{extension}")
 
 # memuat gambar yang akan diuji
 image = cv2.imread(image_path)
+
 # mendapatkan lebar & tinggi gambar
-h, w = image.shape[:2]
+height, width, _ = image.shape
+
+# mengubah ke skala keabuan
+image_gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
+
+# inisialisasi pengenal wajah (cascade wajah default)
+face_cascade = cv2.CascadeClassifier("cascades/haarcascade_frontalface_default.xml")
+
+# mendeteksi semua wajah pada gambar (variabel image)
+faces = face_cascade.detectMultiScale(image_gray, 1.3, 5)
 
 # pra-pemrosesan gambar: resize dan pengurangan mean (rata-rata)
 blob = cv2.dnn.blobFromImage(image, 1.0, (300, 300), (104.0, 177.0, 123.0))
@@ -42,8 +52,9 @@ model.setInput(blob)
 # melakukan inferensi & mendaptkan hasilnya
 output = np.squeeze(model.forward())
 
-# mendefinisikan variabel font_scale
+# mengatur ukuran font & font style
 font_scale = 1
+font_style = cv2.FONT_HERSHEY_SIMPLEX
 
 # buat persegi panjang untuk mendeteksi wajah dengan perulangan
 for i in range(0, output.shape[0]):
@@ -53,7 +64,7 @@ for i in range(0, output.shape[0]):
     # jika kepercayaan di atas 50%, maka gambarkan kotak sekitarnya
     if face_accuracy > 0.5:
         # get koordinat kotak sekitarnya dan memperbesar ukurannya ke gambar asli
-        box = output[i, 3:7] * np.array([w, h, w, h])
+        box = output[i, 3:7] * np.array([width, height, width, height])
         # mengkonversi ke integer
         start_x, start_y, end_x, end_y = box.astype(np.int64)
         # menggambar persegi panjang disekitar wajah
@@ -65,13 +76,21 @@ for i in range(0, output.shape[0]):
             image,
             f"Face {face_accuracy*100:.2f}%",
             (start_x, start_y - 5),
-            cv2.FONT_HERSHEY_SIMPLEX,
+            font_style,
             font_scale,
             (0, 128, 0),
             2,
         )
+if len(faces) > 1:
+    print(f"{len(faces)} faces detected on the camera")
+else:
+    print(f"{len(faces)} face detected on the camera")
 
-# menampilkan gambarnya pada jendela baru
+# mengatur ukuran jendela sesuai dengan gambar asli
+cv2.namedWindow("The results", cv2.WINDOW_NORMAL)
+cv2.resizeWindow("The results", width, height)
+
+# # menampilkan gambarnya pada jendela baru
 cv2.imshow("The results", image)
 cv2.waitKey(0)
 

@@ -5,8 +5,18 @@ import sys
 # berikan jalur gambar sebagai argumen
 image_path = sys.argv[1]
 
-# membuat gambar output dengan nama yang sama dengan gambar input
-output_image_name = os.path.splitext(image_path)[0] + "_detected.jpg"
+output_directory = "output/"
+
+os.makedirs(output_directory, exist_ok=True)
+
+# Ekstrak nama file dari image_path
+filename = os.path.basename(image_path)
+
+# Memisahkan nama file dan ekstensi
+name, extension = os.path.splitext(filename)
+
+# Gabungkan direktori output & nama file yg ditambah akhiran "_detected"
+output_image_path = os.path.join(output_directory, f"{name}_detected{extension}")
 
 # memuat gambar yang akan diuji
 image = cv2.imread(image_path)
@@ -21,7 +31,10 @@ face_cascade = cv2.CascadeClassifier("cascades/haarcascade_frontalface_default.x
 faces = face_cascade.detectMultiScale(image_gray, 1.3, 5)
 
 # mencetak jumlah wajah yang terdeteksi
-print(f"{len(faces)} faces detected in the image.")
+if len(faces) > 1:
+    print(f"{len(faces)} faces detected on the camera")
+else:
+    print(f"{len(faces)} face detected on the camera")
 
 # untuk setiap wajah akan menggambar persegi
 for x, y, width, height in faces:
@@ -30,4 +43,4 @@ for x, y, width, height in faces:
     )
 
 # menyimpan gambar dengan persegi panjang
-cv2.imwrite(output_image_name, image)
+cv2.imwrite(output_image_path, image)
