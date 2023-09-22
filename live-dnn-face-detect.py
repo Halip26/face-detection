@@ -40,8 +40,9 @@ while True:
     # melakukan inferensi & mendaptkan hasilnya
     output = np.squeeze(model.forward())
 
-    # mendefinisikan variabel font_scale
-    font_scale = 0.6
+    # mengatur ukuran font & font style
+    font_scale = 1
+    font_style = cv2.FONT_HERSHEY_SIMPLEX
 
     # buat persegi panjang untuk mendeteksi wajah dengan perulangan
     for i in range(0, output.shape[0]):
@@ -67,7 +68,7 @@ while True:
                 image,
                 f"Tamvan? {facialAccuracy*100:.2f}%",
                 (start_x, start_y - 5),
-                cv2.FONT_HERSHEY_SIMPLEX,
+                font_style,
                 font_scale,
                 (0, 128, 0),
                 2,

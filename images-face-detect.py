@@ -42,5 +42,12 @@ for x, y, width, height in faces:
         image, (x, y), (x + width, y + height), color=(0, 128, 0), thickness=4
     )
 
+# mengatur ukuran jendela sesuai dengan gambar asli
+cv2.namedWindow("The results", cv2.WINDOW_NORMAL)
+
+# # menampilkan gambarnya pada jendela baru
+cv2.imshow("The results", image)
+cv2.waitKey(0)
+
 # menyimpan gambar dengan persegi panjang
 cv2.imwrite(output_image_path, image)
