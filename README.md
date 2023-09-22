@@ -6,9 +6,9 @@
 - If you want to detect faces in a sample image like `me.jpg`, run `images-face-detect.py` script that generated another image `me.jpg` which contains rectangles around detected faces.
 - If you want to detect faces in your live cam, run `live-face-detect.py`
 
-## Example here
+## Output in images
 
-  ![me.jpg](output/me.jpg)
+  ![me.jpg](output/me_dnn_detected.jpg)
 
 ## Path prototxt model Caffe
 
