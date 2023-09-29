@@ -72,7 +72,12 @@ for i in range(0, output.shape[0]):
         start_x, start_y, end_x, end_y = box.astype(np.int64)
         # menggambar persegi panjang disekitar wajah
         cv2.rectangle(
-            image, (start_x, start_y), (end_x, end_y), color=(0, 128, 0), thickness=4
+            # lokasi rectanglenya, (blue, green, red), ketebalan
+            image,
+            (start_x, start_y),
+            (end_x, end_y),
+            color=(0, 128, 0),
+            thickness=4,
         )
         # membuat teksnya juga diatas persegi panjang
         cv2.putText(
@@ -81,7 +86,9 @@ for i in range(0, output.shape[0]):
             (start_x, start_y - 5),
             font_style,
             font_scale,
+            # blue, green, red
             (0, 128, 0),
+            # ketebalan
             2,
         )
 # mencetak jumlah wajah yang terdeteksi

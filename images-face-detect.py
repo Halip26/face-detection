@@ -36,7 +36,12 @@ face_count = len(faces)
 # untuk setiap wajah akan menggambar persegi
 for x, y, width, height in faces:
     cv2.rectangle(
-        image, (x, y), (x + width, y + height), color=(0, 128, 0), thickness=4
+        # lokasi rectanglenya, (blue, green, red), ketebalan
+        image,
+        (x, y),
+        (x + width, y + height),
+        color=(0, 128, 0),
+        thickness=4,
     )
 
 # mencetak jumlah wajah yang terdeteksi
