@@ -43,6 +43,9 @@ face_cascade = cv2.CascadeClassifier("cascades/haarcascade_frontalface_default.x
 # mendeteksi semua wajah pada gambar (variabel image)
 faces = face_cascade.detectMultiScale(image_gray, 1.3, 5)
 
+# menghitung jumlah wajah yg terdeteksi
+face_count = len(faces)
+
 # pra-pemrosesan gambar: resize dan pengurangan mean (rata-rata)
 blob = cv2.dnn.blobFromImage(image, 1.0, (300, 300), (104.0, 177.0, 123.0))
 
@@ -61,7 +64,7 @@ for i in range(0, output.shape[0]):
     # membuat var kepercayaan untuk output looping i
     face_accuracy = output[i, 2]
 
-    # jika kepercayaan di atas 50%, maka gambarkan kotak sekitarnya
+    # jika akurasi wajah di atas 50%, maka akn menggambar kotak sekitarnya
     if face_accuracy > 0.5:
         # get koordinat kotak sekitarnya dan memperbesar ukurannya ke gambar asli
         box = output[i, 3:7] * np.array([width, height, width, height])
@@ -82,10 +85,10 @@ for i in range(0, output.shape[0]):
             2,
         )
 # mencetak jumlah wajah yang terdeteksi
-if len(faces) > 1:
-    print(f"{len(faces)} faces detected on the camera")
+if face_count > 1:
+    print(f"{face_count} faces detected on the camera")
 else:
-    print(f"{len(faces)} face detected on the camera")
+    print(f"{face_count} face detected on the camera")
 
 # mengatur lebar & tinggi gambar di window
 width = 720

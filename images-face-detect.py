@@ -40,10 +40,10 @@ for x, y, width, height in faces:
     )
 
 # mencetak jumlah wajah yang terdeteksi
-if len(faces) > 1:
-    print(f"{len(faces)} faces detected on the camera")
+if face_count > 1:
+    print(f"{face_count} faces detected on the camera")
 else:
-    print(f"{len(faces)} face detected on the camera")
+    print(f"{face_count} face detected on the camera")
 
 # mengatur lebar & tinggi gambar di window
 width = 720
