@@ -18,12 +18,12 @@ capture = cv2.VideoCapture(0)
 
 while True:
     # membaca gambar/frame dari kamera
-    live, image = capture.read()
+    live, camera = capture.read()
     # mendapatkan lebar & tinggi gambar
-    h, w = image.shape[:2]
+    h, w = camera.shape[:2]
 
     # menkonversi gambar ke skala abu2
-    image_gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
+    image_gray = cv2.cvtColor(camera, cv2.COLOR_BGR2GRAY)
 
     # mendeteksi semua wajah pada kamera
     faces = face_cascade.detectMultiScale(image_gray, 1.3, 5)
@@ -32,7 +32,7 @@ while True:
     face_count = len(faces)
 
     # pra-pemrosesan gambar: resize dan pengurangan mean (rata-rata)
-    blob = cv2.dnn.blobFromImage(image, 1.0, (300, 300), (104.0, 177.0, 123.0))
+    blob = cv2.dnn.blobFromImage(camera, 1.0, (300, 300), (104.0, 177.0, 123.0))
 
     # menetapkan gambar menjadi input jaringan saraf
     model.setInput(blob)
@@ -57,7 +57,7 @@ while True:
             start_x, start_y, end_x, end_y = box.astype(np.int64)
             # menggambar persegi panjang disekitar wajah
             cv2.rectangle(
-                image,
+                camera,
                 (start_x, start_y),
                 (end_x, end_y),
                 color=(0, 128, 0),
@@ -65,7 +65,7 @@ while True:
             )
             # membuat teksnya juga diatas persegi panjang
             cv2.putText(
-                image,
+                camera,
                 f"Tamvan? {facialAccuracy*100:.2f}%",
                 (start_x, start_y - 5),
                 font_style,
@@ -95,7 +95,7 @@ while True:
             """
 
     # menampilkan jendela baru
-    cv2.imshow("Face detect v1.0", image)
+    cv2.imshow("dnn_Face detect v1.0", camera)
 
     # jika pegguna menekan tombol "q" maka perulangan akan berhenti
     if cv2.waitKey(1) == ord("q"):
