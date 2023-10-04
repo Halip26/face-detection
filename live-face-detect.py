@@ -1,10 +1,10 @@
 import cv2
 
-# membuat objek kamera baru
-capture = cv2.VideoCapture(0)
-
 # menginisialisasi pengenalan wajah (defult face haarcascade)
 face_cascade = cv2.CascadeClassifier("cascades/haarcascade_frontalface_default.xml")
+
+# membuat objek kamera baru
+capture = cv2.VideoCapture(0)
 
 while True:
     # membaca gambar/frame dari kamera
@@ -32,8 +32,7 @@ while True:
     else:
         print(f"{face_count} face detected on the camera", end="\r")
 
-    # jika pegguna menekan tombol q
-    # maka perulangan akan berhenti
+    # jika pegguna menekan tombol "q", maka perulangan akan berhenti
     if cv2.waitKey(1) == ord("q"):
         break
 
