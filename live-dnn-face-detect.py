@@ -10,7 +10,7 @@ model_path = "weights/res10_300x300_ssd_iter_140000_fp16.caffemodel"
 # menginisialisasi pengenalan wajah (defult face haarcascade)
 face_cascade = cv2.CascadeClassifier("cascades/haarcascade_frontalface_default.xml")
 
-# memuat model caffe
+# memuat model caffe data
 model = cv2.dnn.readNetFromCaffe(prototxt_path, model_path)
 
 # membuat objek kamera baru
