@@ -52,7 +52,7 @@ blob = cv2.dnn.blobFromImage(image, 1.0, (300, 300), (104.0, 177.0, 123.0))
 # menetapkan gambar menjadi input jaringan saraf
 model.setInput(blob)
 
-# melakukan inferensi & mendaptkan hasilnya
+# melakukan inferensi & mendapatkan hasilnya
 output = np.squeeze(model.forward())
 
 # mengatur ukuran font & font style
@@ -61,7 +61,7 @@ font_style = cv2.FONT_HERSHEY_SIMPLEX
 
 # buat persegi panjang untuk mendeteksi wajah dengan perulangan
 for i in range(0, output.shape[0]):
-    # membuat var kepercayaan untuk output looping i
+    # membuat var tingkat akurasi wajah untuk output looping i
     face_accuracy = output[i, 2]
 
     # jika akurasi wajah di atas 50%, maka akn menggambar kotak sekitarnya
@@ -70,6 +70,7 @@ for i in range(0, output.shape[0]):
         box = output[i, 3:7] * np.array([width, height, width, height])
         # mengkonversi ke integer
         start_x, start_y, end_x, end_y = box.astype(np.int64)
+
         # menggambar persegi panjang disekitar wajah
         cv2.rectangle(
             # lokasi rectanglenya, (blue, green, red), ketebalan
@@ -79,6 +80,7 @@ for i in range(0, output.shape[0]):
             color=(0, 128, 0),
             thickness=4,
         )
+
         # membuat teksnya juga diatas persegi panjang
         cv2.putText(
             image,
