@@ -66,7 +66,7 @@ while True:
             # membuat teksnya juga diatas persegi panjang
             cv2.putText(
                 camera,
-                f"Tamvan? {facialAccuracy*100:.2f}%",
+                f"Face? {facialAccuracy*100:.2f}%",
                 (start_x, start_y - 5),
                 font_style,
                 font_scale,
