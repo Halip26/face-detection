@@ -97,7 +97,7 @@ while True:
     # menampilkan jendela baru
     cv2.imshow("dnn_Face detect v1.0", camera)
 
-    # jika pegguna menekan tombol "q" maka perulangan akan berhenti
+    # jika pengguna menekan tombol "q" maka perulangan akan berhenti
     if cv2.waitKey(1) == ord("q"):
         break
 
