@@ -111,5 +111,5 @@ cv2.resizeWindow("The results", width, height)
 cv2.imshow("The results", image)
 cv2.waitKey(0)
 
-# menyimpan gambar beserta persegi panjangnya
+# save the image with rectangle & the text
 cv2.imwrite(output_image_path, image)
