@@ -1,5 +1,6 @@
 import cv2
 import numpy as np
+from datetime import datetime
 
 # Jalur prototxt model Caffe
 prototxt_path = "weights/deploy.prototxt.txt"
@@ -100,6 +101,12 @@ while True:
     # jika pengguna menekan tombol "q" maka perulangan akan berhenti
     if cv2.waitKey(1) == ord("q"):
         break
+
+# uncomment jika kamu ingin menyimpan gambar
+cv2.imwrite(
+    "output/live_output_%s.jpg" % datetime.now().strftime("%Y-%m-%d_%H-%M-%S"),
+    camera,
+)
 
 capture.release()
 cv2.destroyAllWindows()
