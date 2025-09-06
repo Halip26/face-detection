@@ -61,8 +61,8 @@ while True:
                 camera,
                 (start_x, start_y),
                 (end_x, end_y),
-                color=(0, 128, 0),
-                thickness=4,
+                color=(245, 135, 66),
+                thickness=2,
             )
             # membuat teksnya juga diatas persegi panjang
             cv2.putText(
@@ -71,7 +71,7 @@ while True:
                 (start_x, start_y - 5),
                 font_style,
                 font_scale,
-                (0, 128, 0),
+                (245, 135, 66),
                 2,
             )
 
@@ -82,7 +82,7 @@ while True:
                 print(f"{face_count} face detected on the camera", end="\r")
 
             # mencetak jumlah wajah yang terdeteksi beserta tingkat akurasinya
-            """
+
             if face_count > 1:
                 print(
                     f"{face_count} faces detected on the camera, {facialAccuracy*100:.2f}% Accuracy",
@@ -93,7 +93,6 @@ while True:
                     f"{face_count} face detected on the camera, {facialAccuracy*100:.2f}% Accuracy",
                     end="\r",
                 )
-            """
 
     # menampilkan jendela baru
     cv2.imshow("dnn_Face detect v1.0", camera)
